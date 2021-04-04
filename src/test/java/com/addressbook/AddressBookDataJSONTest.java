@@ -57,4 +57,16 @@ public class AddressBookDataJSONTest {
         int statusCode = response.getStatusCode();
         Assert.assertEquals(200, statusCode);
     }
+
+    @Test
+    public void givenContacttoDeleteShouldReturnResponseCode200() {
+        AddressBookData[] serverContactData = getContactList();
+        String contactJson = new Gson().toJson(serverContactData);
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.header("Content-Type","application/json");
+        requestSpecification.body(contactJson);
+        Response response = requestSpecification.delete("/contacts/delete/7");
+        int statusCode = response.getStatusCode();
+        Assert.assertEquals(200,statusCode);
+    }
 }
