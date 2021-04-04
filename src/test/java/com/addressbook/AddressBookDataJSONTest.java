@@ -35,6 +35,15 @@ public class AddressBookDataJSONTest {
     public void givenContactsShouldReturnContactList() {
         AddressBookData[] restAssuredBookData = getContactList();
         System.out.println(restAssuredBookData);
-        Assert.assertEquals(5, restAssuredBookData.length);
+        Assert.assertEquals(6, restAssuredBookData.length);
+    }
+
+    @Test
+    public void whenNewContactisInsertedShouldReturnResponseCode201() {
+        AddressBookData[] jsonServerBookData = getContactList();
+        AddressBookData jsonServerBookData1 = new AddressBookData("7", "Wanda", "Maximoff", "Vision House", "Mumbai", "Maharashtra", "400265", "55665556622", "wanda@avenger.com", "2019-06-30");
+        Response response = addContactstoJSONServer(jsonServerBookData1);
+        int statusCode = response.statusCode();
+        Assert.assertEquals(201, statusCode);
     }
 }
