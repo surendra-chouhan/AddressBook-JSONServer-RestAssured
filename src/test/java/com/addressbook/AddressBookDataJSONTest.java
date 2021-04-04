@@ -46,4 +46,15 @@ public class AddressBookDataJSONTest {
         int statusCode = response.statusCode();
         Assert.assertEquals(201, statusCode);
     }
+
+    @Test
+    public void givenContacttoUpdateShouldReturnResponseCode200() {
+        AddressBookData[] serverContactData = getContactList();
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.header("Content-Type","application/json");
+        requestSpecification.body("{\"firstname\":\"Tony\",\"lastname\":\"Stark\",\"address\":\"Marine Lines\",\"city\":\"Mumbai\",\"state\":\"Maharashtra\",\"zip\":\"400009\",\"phonenumber\":\"8872661655\",\"email\":\"tony@avenger.com\",\"date\":\"2019-03-07\"}");
+        Response response = requestSpecification.put("/contacts/update/3");
+        int statusCode = response.getStatusCode();
+        Assert.assertEquals(200, statusCode);
+    }
 }
